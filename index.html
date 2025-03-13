@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campos Multiplataforma</title>
+    <title>Campus Multiplataforma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: white;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(200deg, #851c1c, #560e0e, #000000);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
             color: white;
             display: flex;
             flex-direction: column;
@@ -19,6 +22,12 @@
             text-align: center;
         }
 
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .logo {
             width: 150px;
             height: 150px;
@@ -26,6 +35,7 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
+            filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
         }
 
         .logo img {
@@ -53,6 +63,7 @@
             font-size: 16px;
             margin: 0 5px;
             border-radius: 5px;
+            transition: all 0.3s;
         }
 
         .toggle-button button.active {
@@ -65,30 +76,50 @@
             color: white;
             border: none;
             padding: 15px 30px;
+            text-decoration: none;
             cursor: pointer;
             font-size: 18px;
             border-radius: 5px;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .download-button:active {
+            background-color: #a72d2d;
+            transform: scale(0.95);
+        }
+
+        .download-button::before {
+            content: "⬇️";
+            font-size: 20px;
         }
 
         .description {
             font-size: 14px;
             max-width: 300px;
             margin: 0 auto;
+            text-align: inherit ;
         }
+
+  
     </style>
 </head>
 <body>
     <div class="logo">
         <img src="img/logo.png" alt="Logo Campos Multiplataforma">
     </div>
-    <h1>Campos Multiplataforma</h1>
+    <h1>Campus Multiplataforma</h1>
     <div class="toggle-button">
         <button id="androidButton" class="active">Android</button>
         <button id="iosButton">iOS</button>
     </div>
-    <button class="download-button" id="downloadButton">Baixar para Android</button>
-    <p class="description">O aplicativo Campos Multiplataforma oferece uma experiência única, integrando diversas funcionalidades para Android e iOS.</p>
+    <a id="downloadButton" class="download-button" href="campus.apk" download>Baixar para Android</a>
+    <p class="description">O Campus Multiplataforma centraliza todas as notícias, eventos e publicações da Universidade de Brasília (UnB) em um único app.</p>
 
     <script>
         const androidButton = document.getElementById('androidButton');
@@ -99,12 +130,17 @@
             androidButton.classList.add('active');
             iosButton.classList.remove('active');
             downloadButton.textContent = 'Baixar para Android';
+            downloadButton.setAttribute('href', 'campus.apk');
+            downloadButton.setAttribute('download', 'campus.apk');
         });
 
         iosButton.addEventListener('click', () => {
             iosButton.classList.add('active');
             androidButton.classList.remove('active');
             downloadButton.textContent = 'Baixar para iOS';
+            downloadButton.removeAttribute('download');
+            downloadButton.setAttribute('href', 'https://www.apple.com/app-store/');
+            downloadButton.setAttribute('target', '_blank');
         });
     </script>
 </body>
